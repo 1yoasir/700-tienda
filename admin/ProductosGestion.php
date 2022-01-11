@@ -7,6 +7,8 @@
     // OJO ----> en el 4 campo del constructor debe ponerse el id del creado ( $categoria->getId() ) , demomento no pongo asi porq es una beta
 
     DAO::registrarAccion($traza);
+    var_dump("pp");
+    
 ?>
 
 
