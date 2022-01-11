@@ -8,22 +8,23 @@
 <body>
     <main id="mainCaj">
         <section id="ticket">
-            <h1 id="h1-caj" style="font-size: 3em">TIENDA</h1>
-            <div id="añadir-ticket">
-                <input style="font-size: 1em" type="text" id="productiId" placeholder="productoId"> <br>
-                <br>
+            <h1 id="h1-caj" >TIENDA</h1>
+            <article id="añadir-ticket">
+               <select id="productos">
+               </select>
+
                 <!--ESTE CAMPO ESTA PENSADO PARA AÑADIR "N" NUMERO DE ITEMS AL TICKET-->
 
                <!-- <input style="font-size: 1em" type="text"  id="cantidadProducto" placeholder="cantidadProducto"><br>-->
-                <br>
-                <input style="font-size: 2em" type="submit" value="Añadir">
-                <input style="font-size: 2em" type="submit" value="X2">
-                <input style="font-size: 2em" type="submit" value="X3">
-            </div>
+
+                <input type="number" id="cantidad"  min="1" max="20" placeholder="Cantidad">
+                <input type="button" id="boton" value="Añadir">
+            </article>
         </section>
-            <div id="posibleTicket">
-                <h2>Posible ticket aqui</h2>
-            </div>
+            <article id="posibleTicket">
+                <h2>Factura de la tienda</h2>
+            </article>
     </main>
+    <script src="CajeroTicket.js"></script>
 </body>
 </html>
