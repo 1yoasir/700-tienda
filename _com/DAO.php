@@ -92,6 +92,17 @@ class DAO
         else return null;
     }
 
+    private static function productoIdObtenerPorDenominacion(string $denominacion): ?Producto
+    {
+        $rs = Self::ejecutarConsulta(
+            "SELECT id FROM producto WHERE denominacion=?",
+            [$denominacion]
+        );
+
+        if($rs) return $producto = Self::productoCrearDesdeFila($rs);
+        else return null;
+    }
+
     public static function productoObtenerTodos(): array
     {
         $rs = Self::ejecutarConsulta(
