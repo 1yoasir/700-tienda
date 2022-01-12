@@ -2,7 +2,7 @@
 
 require_once "../_com/__RequireOnceComunes.php";
 
-$producto = new Producto($_REQUEST["id"], $_REQUEST["denominacion"], $_REQUEST["tipo"], $_REQUEST["precioUnidad"], $_REQUEST["stock"]);
+$producto = new Producto($_REQUEST["id"], $_REQUEST["denominacion"], $_REQUEST["precioUnidad"], $_REQUEST["stock"], $_REQUEST["familiaId"]);
 
 $producto = DAO::productoActualizar($producto);
 

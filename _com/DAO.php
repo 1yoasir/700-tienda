@@ -84,7 +84,17 @@ class DAO
     private static function productoObtenerPorId(int $id): ?Producto
     {
         $rs = Self::ejecutarConsulta(
-            "SELECT * FROM producto WHERE id=?",
+            " SELECT
+                    p.id       AS p_id,
+                    p.denominacion   AS p_denominacion,
+                    p.familiaId AS p_familiaId,
+                    p.stock       AS p_stock,
+                    p.precioUnidad   AS p_precioUnidad,
+                    f.id       AS f_id,
+                    f.nombre   AS f_nombre
+                FROM
+                   producto AS p INNER JOIN familiaProductos AS f ON p.familiaId = f.id 
+                WHERE p.id=?",
             [$id]
         );
 
@@ -163,11 +173,11 @@ class DAO
         return ($filasAfectadas == 1);
     }
 
-    public static function productoCrear(string $nombre, string $tipo, string $precio, string $stock): ?Producto
+    public static function productoCrear(string $nombre, string $precio, string $stock, string $familiaId): ?Producto
     {
         $idAutogenerado = Self::ejecutarInsert(
             "INSERT INTO producto  VALUES (NULL ,?, ?, ?, ?)",
-            [$nombre, $tipo, $precio, $stock]
+            [$nombre, $precio, $stock, $familiaId]
         );
 
         if ($idAutogenerado == null) return null;
@@ -177,8 +187,8 @@ class DAO
     public static function productoActualizar(Producto $producto): ?Producto
     {
         $filasAfectadas = Self::ejecutarUpdel(
-            "UPDATE producto SET denominacion=?, tipo=?, precioUnidad=?, stock=? WHERE id=?",
-            [$producto->getDenominacion(), $producto->getTipo(), $producto->getPrecio(), $producto->getStock(), $producto->getId()]
+            "UPDATE producto SET denominacion=?, precioUnidad=?, stock=?, familiaId=? WHERE id=?",
+            [$producto->getDenominacion(), $producto->getPrecio(), $producto->getStock(), $producto->getFamiliaId(), $producto->getId()]
         );
 
         if ($filasAfectadas === null) return null; // Necesario triple igual porque si no considera que 0 sí es igual a null

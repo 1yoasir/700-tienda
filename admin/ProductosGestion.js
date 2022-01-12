@@ -70,7 +70,7 @@ function inicializar() {
             for (var i=0; i<productosInicio.length; i++) {
                 domInsertar(productosInicio[i]);
                 addProductoSelectFiltro("selectTipos", productosInicio[i]); //-------------------
-               // addProductoSelectFiltro("selTipos", productosInicio[i]); //-----------------
+                addProductoSelectFiltro("selTipos", productosInicio[i]); //-----------------
             }
             todosLosDatosCargados = true;
             document.getElementById("selectTipos").addEventListener("click", realizarFiltro, false);
@@ -167,7 +167,7 @@ function clickCrear() {
 
     llamadaAjax("ProductoCrear.php", objetoAParametrosParaRequest(producto),
         function(texto) {
-        debugger
+       // debugger
             // Se re-crean los datos por si han modificado/normalizado algún valor en el servidor.
             var producto = JSON.parse(texto);
              //productosInicio = JSON.parse(texto);
@@ -199,9 +199,9 @@ function addProductoSelectFiltro(nombreSelectHTMl, productoActual) {
     var select = document.getElementById(nombreSelectHTMl);
     var optionsExistentes = select.options;
     var existe = false;
+    //En el for siguiente recorro los options del select de filtrado
+    //para ver si ya existe la familia actual en cuyo caso no la añado como option
     for (let i = 0; i < optionsExistentes.length; i++) {
-
-        console.log("Al iniciar cargo datos y este le meto -> " + optionsExistentes[i].textContent)
         if (optionsExistentes[i].value == productoActual.familiaId) {
             existe = true;
         }
@@ -233,7 +233,7 @@ function blurModificar(input) {
 }
 
 function clickEliminar(id) {
-    llamadaAjax("ProductoEliminar.php", "id=" + id,
+    llamadaAjax("ProductoEliminar.php?id=", "" + id,
         function (texto) {
             var operacionOK = JSON.parse(texto);
 
