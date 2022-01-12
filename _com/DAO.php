@@ -78,7 +78,7 @@ class DAO
 
     private static function productoCrearDesdeFila(array $fila): Producto
     {
-        return new Producto($fila["id"], $fila["denominacion"], $fila["tipo"], $fila["precioUnidad"], $fila["stock"]);
+        return new Producto($fila["p_id"], $fila["p_denominacion"], $fila["p_precioUnidad"], $fila["p_stock"], $fila["p_familiaId"], $fila["f_nombre"]);
     }
 
     private static function productoObtenerPorId(int $id): ?Producto
@@ -95,9 +95,26 @@ class DAO
     public static function productoObtenerTodos(): array
     {
         $rs = Self::ejecutarConsulta(
-            "SELECT * FROM producto ORDER BY denominacion",
+            //"SELECT * FROM producto ORDER BY denominacion",
+             "
+               SELECT
+                    p.id       AS p_id,
+                    p.denominacion   AS p_denominacion,
+                    p.familiaId AS p_familiaId,
+                    p.stock       AS p_stock,
+                    p.precioUnidad   AS p_precioUnidad,
+                    f.id       AS f_id,
+                    f.nombre   AS f_nombre
+                FROM
+                   producto AS p INNER JOIN familiaProductos AS f
+                   ON p.familiaId = f.id
+                ORDER BY p.denominacion
+        ",
             []
         );
+
+
+
 
         $datos = [];
         foreach ($rs as $fila) {
@@ -108,12 +125,23 @@ class DAO
         return $datos;
     }
 
-    //ESTA FUNCION ES LA QUE HE AÑADIDO YO
-    public static function productoObtenerFiltrados($tipo): array
+    //ESTA FUNCION ES LA QUE HE AÑADIDO YO (jose)
+    public static function productoObtenerFiltrados($familiaId): array
     {
         $rs = Self::ejecutarConsulta(
-            "SELECT * FROM producto WHERE tipo = ?",
-            [$tipo]
+            "
+               SELECT
+                    p.id       AS p_id,
+                    p.denominacion   AS p_denominacion,
+                    p.familiaId AS p_familiaId,
+                    p.stock       AS p_stock,
+                    p.precioUnidad   AS p_precioUnidad,
+                    f.id       AS f_id,
+                    f.nombre   AS f_nombre
+                FROM
+                   producto AS p INNER JOIN familiaProductos AS f
+                   ON p.familiaId = f.id WHERE familiaId = ?",
+            [$familiaId]
         );
 
         $datos = [];

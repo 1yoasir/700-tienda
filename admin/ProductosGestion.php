@@ -38,7 +38,7 @@
         <div id='divCabecera'>
             <div>
                 <div>Denominacion</div>
-                <div>Tipo</div>
+                <div>Familia</div>
                 <div>Precio Unidad</div>
                 <div>Stock</div>
                 <div>Eliminar</div>

@@ -70,7 +70,7 @@ function inicializar() {
             for (var i=0; i<productosInicio.length; i++) {
                 domInsertar(productosInicio[i]);
                 addProductoSelectFiltro("selectTipos", productosInicio[i]); //-------------------
-                addProductoSelectFiltro("selTipos", productosInicio[i]); //-----------------
+               // addProductoSelectFiltro("selTipos", productosInicio[i]); //-----------------
             }
             todosLosDatosCargados = true;
             document.getElementById("selectTipos").addEventListener("click", realizarFiltro, false);
@@ -86,12 +86,13 @@ function realizarFiltro(e) {
     eliminarTodosLosHijosDivDatos();
     //Aqui obtengo el valor que elije el usuario para hacer el filtrado
     var filtrarPor = e.target.value;
+    console.log("filtrarPor vale: " + filtrarPor) //------- <<-->>
     if (filtrarPor == "Todos" && !todosLosDatosCargados) {
         //si el usuario ha filtrado por "Todos" y no estan ya cargados todos los datos entonces muestro todos los datos
         llamadaAjax("ProductoObtenerTodos.php", "",
             function(texto) {
                 productosInicio = JSON.parse(texto);
-                debugger
+                //debugger
                 for (var i=0; i<productosInicio.length; i++) {
                     domInsertar(productosInicio[i]);
                 }
@@ -158,7 +159,7 @@ function clickCrear() {
     let producto = {
         "id" : -1,
         "denominacion" : inpNombre.value,
-        "tipo" : selTipos.value,
+        "familiaNombre" : selTipos.value,
         "precio" : inpPrecio.value,
         "stock" : inpStock.value
     }
@@ -199,12 +200,13 @@ function addProductoSelectFiltro(nombreSelectHTMl, productoActual) {
     var optionsExistentes = select.options;
     var existe = false;
     for (let i = 0; i < optionsExistentes.length; i++) {
-        if (optionsExistentes[i].value == productoActual.tipo) {
+        console.log("Al iniciar cargo datos y este le meto -> " + optionsExistentes[i].textContent)
+        if (optionsExistentes[i].value == productoActual.familiaNombre) {
             existe = true;
         }
     }
     if (!existe) {
-        var opcion = new Option(productoActual.tipo, productoActual.tipo);
+        var opcion = new Option(productoActual.familiaNombre, productoActual.familiaId);
         select.appendChild(opcion);
     }
     existe = false;
@@ -294,7 +296,7 @@ function domObjetoADiv(producto) {
     let div = document.createElement("div");
             div.setAttribute("id", "producto-" + producto.id);
     div.appendChild(domCrearDivInputText(producto.denominacion, "blurModificar(this);"));
-    div.appendChild(domCrearDivInputText(producto.tipo, "blurModificar(this);"));
+    div.appendChild(domCrearDivInputText(producto.familiaNombre, "blurModificar(this);"));
     div.appendChild(domCrearDivInputText(producto.precio, "blurModificar(this);"));
     div.appendChild(domCrearDivInputText(producto.stock, "blurModificar(this);"));
     div.appendChild(domCrearDivIcon("fa fa-trash", "clickEliminar(" + producto.id + ");"));
@@ -310,7 +312,7 @@ function domDivAObjeto(div) {
     return { // Devolvemos un objeto recién creado con los datos que hemos obtenido.
         "id": extraerId(div.id),
         "denominacion": div.children[0].children[0].value,
-        "tipo": div.children[1].children[0].value,
+        "familiaNombre": div.children[1].children[0].value,
         "precioUnidad": div.children[2].children[0].value,
         "stock": div.children[3].children[0].value,
     }
@@ -333,8 +335,8 @@ function domInsertar(productoNueva, enOrden=false) {
     if (enOrden) {
         for (let pos=0; pos < divDatos.children.length; pos++) {
             let productoActual = domObtenerObjeto(pos);
-            let cadenaActual = productoActual.denominacion + productoActual.tipo + productoActual.precioUnidad + productoActual.stock + productoNueva.id;
-            let cadenaNueva = productoNueva.denominacion + productoNueva.tipo + productoNueva.precioUnidad + productoNueva.stock + productoNueva.id;
+            let cadenaActual = productoActual.denominacion + productoActual.familiaNombre + productoActual.precioUnidad + productoActual.stock + productoNueva.id;
+            let cadenaNueva = productoNueva.denominacion + productoNueva.familiaNombre + productoNueva.precioUnidad + productoNueva.stock + productoNueva.id;
 
             if (cadenaNueva.localeCompare(cadenaActual) == -1) {
                 // Si la categoría nueva va ANTES que la actual, este es el punto en el que insertarla.

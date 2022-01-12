@@ -25,26 +25,43 @@ INSERT INTO linea (ticketId, productoId, unidades, precioUnidad) VALUES
 (2, 7, 23, '7.89'),
 (2, 6, 12, '5.99');
 
+
+CREATE TABLE IF NOT EXISTS familiaProductos (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    nombre varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+    PRIMARY KEY (id)
+    ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE familiaProductos;
+INSERT INTO familiaProductos (id, nombre) VALUES
+                                       (1, 'Postres'),
+                                       (2, 'Frutas'),
+                                       (3, 'Verduras'),
+                                       (4, 'Galletas'),
+                                       (5, 'Pastas'),
+                                       (99, 'Otros');
+
 CREATE TABLE IF NOT EXISTS producto (
   id int(2) NOT NULL AUTO_INCREMENT,
   denominacion varchar(30) NOT NULL,
-  tipo varchar(30) NOT NULL,
   precioUnidad int(3) NOT NULL,
   stock int(3) NOT NULL,
-  PRIMARY KEY (id)
+  familiaId int(11) NOT NULL,
+  PRIMARY KEY (id),
+  KEY fk_familiaIdIdx (familiaId)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 TRUNCATE TABLE producto;
-INSERT INTO producto (id, denominacion, tipo, precioUnidad, stock) VALUES
-(1, 'Patatas', 'Otros', 1, 29),
-(2, 'Pizza', 'Pastas', 2, 9),
-(3, 'Lechuga', 'Verduras', 0, 8),
-(4, 'Pimiento', 'Verduras', 1, 4),
-(5, 'Fresas', 'Frutas', 2, 40),
-(6, 'Napolitana', 'Galletas', 1, 60),
-(7, 'Chocolate', 'Postres', 2, 45),
-(8, 'Manzana', 'Frutas', 1, 50),
-(9, 'Pera', 'Frutas', 1, 29);
+INSERT INTO producto (id, denominacion, precioUnidad, stock, familiaId) VALUES
+(1, 'Patatas', 1, 29, 99),
+(2, 'Pizza', 2, 9, 5),
+(3, 'Lechuga', 0, 8, 3),
+(4, 'Pimiento', 1, 4, 3),
+(5, 'Fresas', 2, 40, 2),
+(6, 'Napolitana', 1, 60, 4),
+(7, 'Chocolate', 2, 45, 1),
+(8, 'Manzana', 1, 50, 2),
+(9, 'Pera', 1, 29, 2);
 
 CREATE TABLE IF NOT EXISTS puesto (
   id int(3) NOT NULL,

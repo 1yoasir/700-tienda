@@ -10,14 +10,17 @@ class Producto extends Dato
     protected string $tipoId;
     protected string $precio;
     protected string $stock;
+    protected string $familiaId;
+    protected string $familiaNombre;
 
-    public function __construct($id, $denominacion, $tipo, $precio, $stock)
+    public function __construct($id, $denominacion, $precio, $stock, $familiaId, $familiaNombre)
     {
         $this->id = $id;
         $this->denominacion = $denominacion;
-        $this->tipo = $tipo;
         $this->precio = $precio;
         $this->stock = $stock;
+        $this->familiaId = $familiaId;
+        $this->familiaNombre = $familiaNombre;
     }
 
     public function getDenominacion()
@@ -30,14 +33,24 @@ class Producto extends Dato
         $this->denominacion = $denominacion;
     }
 
-    public function getTipo()
+    public function getFamiliaId()
     {
-        return $this->tipo;
+        return $this->familiaId;
     }
 
-    public function setTipo($tipo)
+    public function setFamiliaId($familiaId)
     {
-        $this->tipo = $tipo;
+        $this->familiaId = $familiaId;
+    }
+
+    public function getFamiliaNombre()
+    {
+        return $this->familiaNombre;
+    }
+
+    public function setFamiliaNombre($familiaNombre)
+    {
+        $this->familiaId = $familiaNombre;
     }
 
     public function getPrecio()
@@ -65,9 +78,10 @@ class Producto extends Dato
         return [
             "id" => $this->id,
             "denominacion" => $this->denominacion,
-            "tipo" => $this->tipo,
             "precio" => $this->precio,
             "stock" => $this->stock,
+            "familiaId" => $this->familiaId,
+            "familiaNombre" => $this->familiaNombre,
         ];
 
         // Esto sería lo mismo:
