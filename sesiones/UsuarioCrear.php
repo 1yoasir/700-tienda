@@ -11,5 +11,5 @@
     // TODO puede tener utilidad devolver el usuario creado como objeto Usuario
     // echo json_encode($usuario);
 
-    redireccionar("../admin/ProductosGestion.php");
+    redireccionar( "../admin/ProductosGestion.php");
 

@@ -9,8 +9,6 @@
     DAO::registrarAccion($traza);
 ?>
 
-
-
 <html>
 
 <head>
@@ -21,48 +19,52 @@
     <script src='ProductosGestion.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
-
 <body>
+    <main>
 
-    <h1>Gestión de Productos</h1>
-    <br><br>
-    <section id='secFiltroTipo'>
-        <p>Filtrar por tipo</p>
-        <select id='selectTipos'>
-            <option value="Todos">Todos</option>
-        </select>
-
-    </section>
-    <br><br>
-    <section id="secTabla">
-        <div id='divCabecera'>
+        <section id='secFiltroTipo'>
+            <h1>Gestion de productos</h1>
             <div>
-                <div>Denominacion</div>
-                <div>Tipo</div>
-                <div>Precio Unidad</div>
-                <div>Stock</div>
-                <div>Eliminar</div>
+                <p>Filtrar por tipo</p>
+                <select id='selectTipos'>
+                    <option value="Todos">Todos</option>
+                </select>
             </div>
-        </div>
-        <div id='divDatos'>
-        </div>
-    </section>
+        </section>
 
-    <br>
+        <section id="table">
+            <table>
+                    <th>Denominacion</th>
+                    <th>Tipo</th>
+                    <th>Precio Unidad</th>
+                    <th>Stock</th>
+                    <th>Eliminar</th>
+            </table>
 
-    <label>Nombre producto</label>
-    <input type='text' id='inpNombre' placeholder='Producto' value='' /> <br><br>
-    <label>Precio Unidad</label>
-    <input type='number' id='inpPrecio' min="0" value='0' /> <br><br>
-    <label>Stock</label>
-    <input type='number' id='inpStock' min="0" value='0' /> <br><br>
-    <label for="selTipos">Selecciona un tipo</label>
-    <select name="selTipos" id="selTipos">
-        <!--HAY QUE CARGAR LOS DATOS DESDE JS REUTILIZAR EL CODIGO DEL FILTRADO-->
-    </select>
-    <button id='btnCrear'>Crear</button>
-    <button id="btnCerrarSesion"> Cerrar sesión </button>
+            <div id="divDatos">
 
+            </div>
+        </section>
+
+
+        <section>
+
+            <h1>Crear Producto</h1>
+
+            <label>Nombre producto</label>
+            <input type='text' id='inpNombre' placeholder='Producto' value='' /> <br><br>
+            <label>Precio Unidad</label>
+            <input type='number' id='inpPrecio' min="0" value='0' /> <br><br>
+            <label>Stock</label>
+            <input type='number' id='inpStock' min="0" value='0' /> <br><br>
+            <label for="selTipos">Selecciona un tipo</label>
+            <select name="selTipos" id="selTipos">
+                <!--HAY QUE CARGAR LOS DATOS DESDE JS REUTILIZAR EL CODIGO DEL FILTRADO-->
+            </select>
+            <button id='btnCrear'>Crear</button>
+            <button id="btnCerrarSesion"> Cerrar sesión </button>
+        </section>
+
+    </main>
 </body>
-
 </html>

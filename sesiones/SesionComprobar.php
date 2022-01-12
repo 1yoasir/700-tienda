@@ -15,6 +15,6 @@
 
         redireccionar("../admin/ProductosGestion.php");
     } else {
-        redireccionar("SesionFormulario.php?error");
+        redireccionar("SesionFormulario.php");
     }
 ?>

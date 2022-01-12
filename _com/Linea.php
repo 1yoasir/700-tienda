@@ -1,6 +1,6 @@
 <?php
 
-require_once "__RequireOnceComunes.php";
+require_once "Producto.php";
 
 class Linea extends Producto
 {

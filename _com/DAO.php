@@ -135,6 +135,7 @@ class DAO
         return ($filasAfectadas == 1);
     }
 
+
     public static function productoCrear(string $nombre, string $tipo, string $precio, string $stock): ?Producto
     {
         $idAutogenerado = Self::ejecutarInsert(
@@ -197,6 +198,7 @@ class DAO
         if ($rs)    return Self::usuarioCrearDesdeFila($rs[0]);
         else        return null;
     }
+
 
     public static function usuarioObtenerPorCookie($id, $codigoCookie): ?Usuario
     {

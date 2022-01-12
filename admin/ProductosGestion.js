@@ -237,12 +237,13 @@ function clickEliminar(id) {
             debugger;
             if (operacionOK == "NOSESION") {
                 alert("Nos vamos, porque no hay sesión.");
-                window.location.href = "../sesiones/SesionFormulario.php";
+                window.location.href = "../sesiones/SesionFormularioX.php";
                 alert("No debería verse esto");
             }
 
             if (operacionOK) {
                 domEliminar(id);
+                eliminarAviso(id);
             } else {
                 notificarUsuario("Error Ajax al eliminar: " + texto);
             }
@@ -267,6 +268,7 @@ function domCrearDivInputText(textoValue, codigoOnblur) {
 
     return div;
 }
+
 function domCrearDivSelect(options, codigoOnblur) {
     let div = document.createElement("div");
     let select = document.createElement("select");
@@ -365,6 +367,10 @@ function domEliminar(id) {
     let pos = domLocalizarPosicion(id);
     let div = domObtenerDiv(pos);
     div.remove();
+}
+
+function eliminarAviso(id) {
+    alert("El producto " +  id  + " ha sido eliminado correctamente");
 }
 
 function domModificar(producto) {

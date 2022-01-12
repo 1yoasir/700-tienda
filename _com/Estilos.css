@@ -1,36 +1,78 @@
-#secTabla > div {
-    display: table;
-    width: 40%;
+* {
+    box-sizing: border-box;
 }
 
-#secTabla > div > div {
-    display: table-row;
+/* TABLA */
+table th {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    min-width: 9.75em;
+    max-width: 9.75em;
+    padding: 4px;
+}
+
+#table {
     width: 100%;
+    margin-top: 1%;
 }
 
-#secTabla > div > div > div {
+#table div {
+    width: 100%;
     display: table-cell;
     text-align: center;
-    border: 1px solid silver;
-    width: 25%;
     padding: 1px;
 }
 
-#secTabla > div > div > div > input {
-    width: 100%;
-    border: none;
+#table > div > div {
+    display: table-row;
 }
+
+#table > div > div div:nth-child(1) {
+    border-left: 1px solid silver;
+}
+
+#table > div > div > div > input,
+#table > div > div > div > i{
+    min-width: 9.47rem;
+    max-width: 9.47rem;
+    border: none;
+    text-align: center;
+}
+
+#table > div > div > div > i {
+    color: red;
+    font-size: 1.3rem;
+}
+
+body > main > section:nth-child(3) > table > tbody > tr > th:nth-child(1) {
+    border-left: 1px solid black;
+}
+
+#table > div > div > div  {
+    border-bottom: 1px solid silver;
+    border-right: 1px solid silver;
+    padding: 2px;
+}
+
+#table > table > tbody > tr > th:nth-child(1) {
+    border-left: 1px solid black;
+}
+
 /*CAJERO TICKET*/
 #mainCaj{
     margin-left: 5em;
 }
+
 #ticket{
     margin-top: 5em;
     margin-left: 3em;
 }
+
 #añadir-ticket{
     width: 23%;
 }
+
 #posibleTicket{
     margin-top: 2em;
     height: 700px;
