@@ -187,8 +187,8 @@ class DAO
     public static function productoActualizar(Producto $producto): ?Producto
     {
         $filasAfectadas = Self::ejecutarUpdel(
-            "UPDATE producto SET denominacion=?, precioUnidad=?, stock=?, familiaId=? WHERE id=?",
-            [$producto->getDenominacion(), $producto->getPrecio(), $producto->getStock(), $producto->getFamiliaId(), $producto->getId()]
+            "UPDATE producto SET denominacion=?, precioUnidad=?, stock=? WHERE id=?",
+            [$producto->getDenominacion(), $producto->getPrecio(), $producto->getStock(), $producto->getId()]
         );
 
         if ($filasAfectadas === null) return null; // Necesario triple igual porque si no considera que 0 sí es igual a null

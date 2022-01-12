@@ -215,8 +215,8 @@ function addProductoSelectFiltro(nombreSelectHTMl, productoActual) {
 function blurModificar(input) {
     let div = input.parentElement.parentElement;
     let producto = domDivAObjeto(div);
-
-    llamadaAjax("ProductoActualizar.php", objetoAParametrosParaRequest(producto),
+console.log("ProductoActualizar.php?"+objetoAParametrosParaRequest(producto))
+    llamadaAjax("ProductoActualizar.php?"+objetoAParametrosParaRequest(producto), "",
         function (texto) {
             if (texto != "null") {
                 // Se re-crean los datos por si han modificado/normalizado algún valor en el servidor.
@@ -233,10 +233,10 @@ function blurModificar(input) {
 }
 
 function clickEliminar(id) {
-    llamadaAjax("ProductoEliminar.php?id=", "" + id,
+    console.log("ProductoEliminar.php?id="+id);
+    llamadaAjax("ProductoEliminar.php?id="+id, "",
         function (texto) {
             var operacionOK = JSON.parse(texto);
-
             debugger;
             if (operacionOK == "NOSESION") {
                 alert("Nos vamos, porque no hay sesión.");
