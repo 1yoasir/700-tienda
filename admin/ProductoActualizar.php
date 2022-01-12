@@ -1,6 +1,7 @@
 <?php
 
 require_once "../_com/__RequireOnceComunes.php";
+require_once "../sesiones/_Sesion.php";
 
 $producto = new Producto($_REQUEST["id"], $_REQUEST["denominacion"], $_REQUEST["tipo"], $_REQUEST["precioUnidad"], $_REQUEST["stock"]);
 
