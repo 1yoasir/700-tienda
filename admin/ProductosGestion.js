@@ -112,7 +112,7 @@ function realizarFiltro(e) {
 
                 for (var i=0; i<producto.length; i++) {
                     domInsertar(producto[i]);
-                    addProductoSelectFiltro("selectTipos",producto[i]); //-------------------
+                 //   addProductoSelectFiltro("selectTipos",producto[i]); //-------------------
                 }
             },
             function(texto) {
@@ -200,8 +200,9 @@ function addProductoSelectFiltro(nombreSelectHTMl, productoActual) {
     var optionsExistentes = select.options;
     var existe = false;
     for (let i = 0; i < optionsExistentes.length; i++) {
+
         console.log("Al iniciar cargo datos y este le meto -> " + optionsExistentes[i].textContent)
-        if (optionsExistentes[i].value == productoActual.familiaNombre) {
+        if (optionsExistentes[i].value == productoActual.familiaId) {
             existe = true;
         }
     }
