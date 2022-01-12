@@ -183,7 +183,7 @@ anadir.addEventListener('click',CargarTicket);
     }else{
         let posibleTicket = document.getElementById('posibleTicket');
         let producto = document.getElementById('productos').value;
-        posibleTicket.innerHTML +="<p>"+ producto + "------------------------------------------" + cantidad.value+"</p>";
+        posibleTicket.innerHTML +="<p>"+ producto + "-------------------------------------------------------" + cantidad.value+"</p>";
     }
 };
 
