@@ -373,3 +373,19 @@ function domModificar(producto) {
     // Se fuerza la ordenación, ya que este elemento podría no quedar ordenado si se pone al final.
     domInsertar(producto, true);
 }
+
+// Ventana para crear producto
+function evento(){
+    document.getElementById("btnCrearProducto").addEventListener("click", mostrarVentanaCrearProducto);
+    document.getElementById("iconoX").addEventListener("click", cerrarVentanaCrearProducto);
+}
+
+document.addEventListener("readystatechange", evento);
+
+function mostrarVentanaCrearProducto(){
+    document.getElementById("crearProducto").style.display = "block";
+}
+
+function cerrarVentanaCrearProducto(){
+    document.getElementById("crearProducto").style.display = "none";
+}

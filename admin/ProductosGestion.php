@@ -32,6 +32,8 @@
             <option value="Todos">Todos</option>
         </select>
 
+        <button id='btnCrearProducto'>Crear Producto</button>
+
     </section>
     <br><br>
     <section id="secTabla">
@@ -50,6 +52,10 @@
 
     <br>
 
+<section id="crearProducto">
+    <div id="iconoX">
+        <i class="fa fa-times-circle"></i>
+    </div>
     <label>Nombre producto</label>
     <input type='text' id='inpNombre' placeholder='Producto' value='' /> <br><br>
     <label>Precio Unidad</label>
@@ -61,6 +67,8 @@
         <!--HAY QUE CARGAR LOS DATOS DESDE JS REUTILIZAR EL CODIGO DEL FILTRADO-->
     </select>
     <button id='btnCrear'>Crear</button>
+</section> <br>
+
     <button id="btnCerrarSesion"> Cerrar sesión </button>
 
 </body>
