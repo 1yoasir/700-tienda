@@ -33,6 +33,7 @@ function llamadaAjax(url, parametros, manejadorOK, manejadorError) {
     };
 
     request.send(parametros);
+
 }
 
 function extraerId(texto) {
@@ -71,7 +72,6 @@ function inicializar() {
             }
             todosLosDatosCargados = true;
             document.getElementById("productos").addEventListener("click", realizarFiltro, false);
-
         },
         function(texto) {
             alert(productosInicio);
@@ -124,12 +124,12 @@ function addProductoSelectFiltro(nombreSelectHTMl, productoActual) {
     var optionsExistentes = select.options;
     var existe = false;
     for (let i = 0; i < optionsExistentes.length; i++) {
-        if (optionsExistentes[i].value == productoActual.tipo) {
+        if (optionsExistentes[i].value == productoActual.id) {
             existe = true;
         }
     }
     if (!existe) {
-        var opcion = new Option(productoActual.denominacion, productoActual.denominacion);
+        var opcion = new Option(productoActual.denominacion, productoActual.id);
         select.appendChild(opcion);
     }
     existe = false;
@@ -167,12 +167,27 @@ function domInsertar(productoNueva, enOrden=false) {
     }
 }
 
+function obtenerProductoporid(id,cantidad){
+    llamadaAjax("ProductoObtenerPorId.php?id="+id, "",
+        function(texto) {
+            productosInicio = JSON.parse(texto);
+            console.log(productosInicio);
+            imprimir(productosInicio.id,productosInicio.denominacion,productosInicio.precioUnidad,cantidad);
+
+        },
+        function(texto) {
+            alert(productosInicio);
+            notificarUsuario("Error Ajax al cargar al inicializar: " + texto);
+        }
+    );
+}
 //funciones y eventos visuales en el article ticket
 
  var anadir=document.getElementById('boton');
 anadir.addEventListener('click',CargarTicket);
 
    function CargarTicket(){
+       debugger;
     let cantidad=document.getElementById('cantidad');
     if(cantidad.value <1){
         alert("No puedes comprar menos de 1 producto");
@@ -181,12 +196,15 @@ anadir.addEventListener('click',CargarTicket);
         alert("No puedes comprar mas de 20 productos");
         cantidad.value=1;
     }else{
-        let posibleTicket = document.getElementById('posibleTicket');
         let producto = document.getElementById('productos').value;
-        posibleTicket.innerHTML +="<p>"+ producto + "-------------------------------------------------------" + cantidad.value+"</p>";
+        obtenerProductoporid(producto,cantidad);
     }
 };
 
+   function imprimir(id,denominacion,precioUnidad,cantidad){
+       let posibleTicket = document.getElementById('posibleTicket');
+       posibleTicket.innerHTML+="<p>"+denominacion+"--------------------------------"+cantidad+"</p>";
+   }
 
 
 

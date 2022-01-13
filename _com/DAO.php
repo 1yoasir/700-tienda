@@ -81,7 +81,7 @@ class DAO
         return new Producto($fila["id"], $fila["denominacion"], $fila["tipo"], $fila["precioUnidad"], $fila["stock"]);
     }
 
-    private static function productoObtenerPorId(int $id): ?Producto
+    public static function productoObtenerPorId(int $id): ?Producto
     {
         $rs = Self::ejecutarConsulta(
             "SELECT * FROM producto WHERE id=?",
