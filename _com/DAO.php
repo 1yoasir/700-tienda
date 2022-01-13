@@ -244,4 +244,12 @@ class DAO
 
         return ($filasAfectadas == 1);
     }
+
+    //Ticket
+
+    public static function ticketCrear($id, $apertura, $caja, $empleadoId): Ticket
+    {
+        return new Ticket($id, $apertura, $caja, $empleadoId);
+    }
+
 }
