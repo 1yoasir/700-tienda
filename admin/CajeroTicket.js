@@ -172,7 +172,7 @@ function obtenerProductoporid(id,cantidad){
         function(texto) {
             productosInicio = JSON.parse(texto);
             console.log(productosInicio);
-            imprimir(productosInicio.id,productosInicio.denominacion,productosInicio.precioUnidad,cantidad);
+            imprimir(productosInicio.id,productosInicio.denominacion,productosInicio.precio,cantidad);
 
         },
         function(texto) {
@@ -188,7 +188,7 @@ anadir.addEventListener('click',CargarTicket);
 
    function CargarTicket(){
        debugger;
-    let cantidad=document.getElementById('cantidad');
+    let cantidad=document.getElementById('cantidad').value;
     if(cantidad.value <1){
         alert("No puedes comprar menos de 1 producto");
         cantidad.value=1;
@@ -201,9 +201,10 @@ anadir.addEventListener('click',CargarTicket);
     }
 };
 
-   function imprimir(id,denominacion,precioUnidad,cantidad){
-       let posibleTicket = document.getElementById('posibleTicket');
-       posibleTicket.innerHTML+="<p>"+denominacion+"--------------------------------"+cantidad+"</p>";
+   function imprimir(id,denominacion,precio,cantidad){
+       let impreso = document.getElementById('impreso');
+        impreso.innerHTML+=("<p>"+denominacion+"-----------------"+cantidad+"----------------"+precio+"€</p>")
+
    }
 
 
