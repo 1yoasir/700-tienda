@@ -167,13 +167,20 @@ function domInsertar(productoNueva, enOrden=false) {
     }
 }
 
-function obtenerProductoporid(id,cantidad){
+function obtenerProductoporid(id,cantidad,span){
     llamadaAjax("ProductoObtenerPorId.php?id="+id, "",
         function(texto) {
             productosInicio = JSON.parse(texto);
             console.log(productosInicio);
-            imprimir(productosInicio.id,productosInicio.denominacion,productosInicio.precio,cantidad);
-
+            if(cantidad.value <1){
+                alert("No puedes comprar menos de 1 producto");
+                cantidad.value=1;
+            }else if(cantidad.value > parseInt(productosInicio.stock)){
+                alert("No puedes comprar mas del stock existente que es "+cantidad.value);
+                cantidad.value=1;
+            }else {
+                imprimir(productosInicio.id, productosInicio.denominacion, parseInt(productosInicio.precio), cantidad.value,parseInt(span));
+            }
         },
         function(texto) {
             alert(productosInicio);
@@ -187,24 +194,21 @@ function obtenerProductoporid(id,cantidad){
 anadir.addEventListener('click',CargarTicket);
 
    function CargarTicket(){
-       debugger;
-    let cantidad=document.getElementById('cantidad').value;
-    if(cantidad.value <1){
-        alert("No puedes comprar menos de 1 producto");
-        cantidad.value=1;
-    }else if(cantidad.value >20){
-        alert("No puedes comprar mas de 20 productos");
-        cantidad.value=1;
-    }else{
+
+    let cantidad=document.getElementById('cantidad');
+       let span=document.getElementById('numero');
         let producto = document.getElementById('productos').value;
-        obtenerProductoporid(producto,cantidad);
-    }
+        obtenerProductoporid(producto,cantidad,span.value);
 };
 
-   function imprimir(id,denominacion,precio,cantidad){
+   function imprimir(id,denominacion,precio,cantidad,span){
        let impreso = document.getElementById('impreso');
-        impreso.innerHTML+=("<p>"+denominacion+"-----------------"+cantidad+"----------------"+precio+"€</p>")
+       let total = document.getElementById('precio');
+       let precio1=precio*cantidad;
+       let precioTotal=span+precio1;
 
+        impreso.innerHTML+=("<p>"+denominacion+"-----------------"+cantidad+"----------------"+precio+"€</p>")
+        total.innerHTML=("<h4>Total-----------------------<input type='number' id='numero'  style='border: none' value="+precioTotal+"></input></h4>");
    }
 
 
