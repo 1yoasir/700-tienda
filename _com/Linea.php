@@ -8,19 +8,13 @@ class Linea extends Producto
 
     private int $cantidad;
 
-
-    public function __construct($ticketId, $cantidad,$productoId, $denominacion, $tipo, $precio,$stock)
+    public function __construct($lineaId, $productoId, $denominacion, $precio, $cantidad)
     {
-        
-        $this->ticketId = $ticketId;
-        $this->setCantidad($cantidad);
-        $this->precio=$precio;
-
-        $this->id=$productoId;
+        $this->lineaId=$lineaId;
+        $this->productoId=$productoId;
         $this->denominacion = $denominacion;
-        $this->tipo = $tipo;
         $this->precio = $precio;
-        $this->stock = $stock;
+        $this->setCantidad($cantidad);
     }
 
     public function getCantidad(){
@@ -34,15 +28,11 @@ class Linea extends Producto
     public function jsonSerialize()
     {
         return [
-            "ticketId" => $this->id,
-            "productoId" => $this->id,
+            "lineaId" => $this->lineaId,
+            "productoId" => $this->productoId,
             "cantidad" => $this->cantidad,
-            "precio" => $this->precio
+            "precio" => $this->precio,
+            "denominacion" => $this->denominacion
         ];
-
-        // Esto sería lo mismo:
-        //$array["nombre"] = $this->nombre;
-        //$array["id"] = $this->id;
-        //return $array;
     }
 }

@@ -245,6 +245,28 @@ class DAO
         return ($filasAfectadas == 1);
     }
 
+    //Linea
+
+    public static function lineaCrear($idLinea, Producto $producto, $cantidad): Linea
+    {
+        return new Linea(
+            $idLinea,
+            $producto->getId(),
+            $producto->getDenominacion(),
+            $producto->getPrecio(),
+            $cantidad
+        );
+    }
+
+    public static function lineaObtenerDesdeId($id): Linea
+    {
+        $linea = Self::ejecutarConsulta(
+            "SELECT * FROM linea WHERE lineaId = ?",
+            [$id]
+        );
+        return $linea;
+    }
+
     //Ticket
 
     public static function ticketCrear($id, $apertura, $caja, $empleadoId): Ticket
@@ -252,4 +274,42 @@ class DAO
         return new Ticket($id, $apertura, $caja, $empleadoId);
     }
 
+    public static function ticketAñadirLinea(Ticket $ticket, Linea $linea)
+    {
+        Self::ejecutarConsulta(
+            "UPDATE ticket SET lineaId = ? WHERE idTicket =?",
+            [$linea->getId(), $ticket->getId()]
+        );
+    }
+
+    private static function total(Linea $linea): double
+    {
+        $total = 0;
+        $total += $linea->getPrecio() * $linea->getCantidad();
+        return $total;
+    }
+
+    public static function ticketObtenerTotal(Ticket $ticket): double
+    {
+        $total = 0;
+        $rs = Self::ejecutarConsulta(
+            "SELECT idLinea FROM ticket WHERE idTicket = ?",
+            [$ticket->getId()]
+        );
+
+        foreach ($rs as $fila) {
+            $linea = Self::lineaObtenerDesdeId($fila);
+            $total += Self::total($linea);
+        }
+        return $total;
+    }
+
+    public static function ticketCerrar(Ticket $ticket)
+    {
+        $total = Self::ticketObtenerTotal($ticket);
+        Self::ejecutarConsulta(
+          "UPDATE ticket SET cierre = NOW(), total = ? WHERE idTicket = ?",
+            [$total, $ticket->getId()]
+        );
+    }
 }

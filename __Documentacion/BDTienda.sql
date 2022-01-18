@@ -8,22 +8,22 @@ CREATE DATABASE IF NOT EXISTS tienda DEFAULT CHARACTER SET utf8mb4 COLLATE utf8m
 USE tienda;
 
 CREATE TABLE IF NOT EXISTS linea (
-  ticketId int(3) NOT NULL AUTO_INCREMENT,
+  lineaId int(3) NOT NULL AUTO_INCREMENT,
   productoId int(3) NOT NULL,
-  unidades int(3) NOT NULL,
+  denominacion varchar(40) NOT NULL,
   precioUnidad decimal(5,2) NOT NULL,
-  KEY ticketId (ticketId),
-  KEY productoId (productoId)
+  cantidad int(3) NOT NULL,
+  PRIMARY KEY (lineaId)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 TRUNCATE TABLE linea;
-INSERT INTO linea (ticketId, productoId, unidades, precioUnidad) VALUES
-(1, 2, 55, '4.99'),
-(1, 4, 3, '2.45'),
-(1, 1, 34, '1.90'),
-(2, 5, 54, '5.00'),
-(2, 7, 23, '7.89'),
-(2, 6, 12, '5.99');
+INSERT INTO linea (lineaId, productoId, denominacion, precioUnidad, cantidad) VALUES
+(1, 2, "chinchetas", '0.20', 55),
+(2, 4, "papel higienico", '2.45', 3),
+(3, 1, "chocolate", '1.90', 3),
+(4, 5, "mascarillas", '5.00', 15),
+(5, 7, "ambientador", '3.89', 2),
+(6, 6, "USB", '5.99', 1);
 
 CREATE TABLE IF NOT EXISTS producto (
   id int(2) NOT NULL AUTO_INCREMENT,
@@ -54,22 +54,25 @@ CREATE TABLE IF NOT EXISTS puesto (
 
 TRUNCATE TABLE puesto;
 CREATE TABLE IF NOT EXISTS ticket (
-  id int(3) NOT NULL AUTO_INCREMENT,
+  idTicket int(3) NOT NULL AUTO_INCREMENT,
   apertura datetime NOT NULL,
+  empleadoId int(2) NOT NULL,
+  caja int(2) NOT NULL,
+  lineaId int(3) DEFAULT NULL,
   cierre datetime DEFAULT NULL,
-  empleadoId int(2) DEFAULT NULL,
-  PRIMARY KEY (id)
+  total float(7) DEFAULT NULL
+  PRIMARY KEY (idTicket)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 TRUNCATE TABLE ticket;
-INSERT INTO ticket (id, apertura, cierre, empleadoId) VALUES
-(1, '2021-04-15 16:00:00', '2021-04-15 20:30:00', 4),
-(2, '2021-04-15 16:01:55', '2021-04-15 20:30:00', 2),
-(3, '2021-04-15 16:01:56', '2021-04-15 20:30:00', 2),
-(4, '2021-04-15 16:03:01', '2021-04-15 20:30:00', 5),
-(5, '2021-04-15 15:00:00', '2021-04-15 20:30:00', 7),
-(6, '2021-04-15 17:00:00', '2021-04-15 20:30:00', 8),
-(7, '2021-04-15 18:00:00', '2021-04-15 20:30:00', 1);
+INSERT INTO ticket (idTicket, apertura, empleadoId, caja, lineaId, cierre, total) VALUES
+(1, '2021-04-15 16:00:00', 4, 27, null, null, null),
+(2, '2021-04-15 16:01:55', 2, 9, null, null, null),
+(3, '2021-04-15 16:01:56', 2, 12, null, null, null),
+(4, '2021-04-15 16:03:01', 5, 1, null, null, null),
+(5, '2021-04-15 15:00:00', 7, 7, null, null, null),
+(6, '2021-04-15 17:00:00', 8, 8, null, null, null),
+(7, '2021-04-15 18:00:00', 1, 10, null, null, null);
 
 CREATE TABLE IF NOT EXISTS traza (
   idUsuario int(2) NOT NULL,
@@ -100,7 +103,7 @@ INSERT INTO usuario (id, identificador, contrasenna, codigoCookie, caducidadCodi
 
 
 ALTER TABLE linea
-  ADD CONSTRAINT linea_ibfk_1 FOREIGN KEY (ticketId) REFERENCES ticket (id),
+  /*ADD CONSTRAINT linea_ibfk_1 FOREIGN KEY (ticketId) REFERENCES ticket (id),*/
   ADD CONSTRAINT linea_ibfk_2 FOREIGN KEY (productoId) REFERENCES producto (id);
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

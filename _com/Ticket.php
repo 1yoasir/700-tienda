@@ -11,12 +11,12 @@ class Ticket extends Dato
     private int $caja;
     private int $empleadoId;
 
-    private ?DateTime $cierre;
+    private ?int $idLinea = null;
+    private ?DateTime $cierre = null;
     private ?int $total = null;
-    private ?array $linea = null;
 
 
-    public function __construct(int $id, DateTime $apertura, int $caja, int $empleadoId)
+    public function __construct($id, $apertura, $caja, $empleadoId)
     {
         $this->id = $id;
         $this->setApertura($apertura);
@@ -59,9 +59,11 @@ class Ticket extends Dato
         return [
             "id" => $this->id,
             "apertura" => $this->apertura,
-            "cierre" => $this->cierre,
             "caja" => $this->caja,
             "empleadoId" => $this->empleadoId,
+            "idLinea" => $this->idLinea,
+            "cierre" => $this->cierre,
+            "total" => $this->total,
         ];
 
         // Esto sería lo mismo:
