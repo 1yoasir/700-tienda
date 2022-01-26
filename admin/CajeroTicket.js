@@ -176,7 +176,7 @@ function obtenerProductoporid(id,cantidad,span){
                 alert("No puedes comprar menos de 1 producto");
                 cantidad.value=1;
             }else if(cantidad.value > parseInt(productosInicio.stock)){
-                alert("No puedes comprar mas del stock existente que es "+cantidad.value);
+                alert("No puedes comprar mas del stock existente que es "+productosInicio.stock);
                 cantidad.value=1;
             }else {
                 imprimir(productosInicio.id, productosInicio.denominacion, parseInt(productosInicio.precio), cantidad.value,parseInt(span));
