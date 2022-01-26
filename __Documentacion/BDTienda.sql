@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS linea (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 TRUNCATE TABLE linea;
+/*TODO quitar denominacion y añadir ticketId (Quitar lineaId de la tabla Ticket), cambiar el nombre de lineaId por numOrden*/
 INSERT INTO linea (lineaId, productoId, denominacion, precioUnidad, cantidad) VALUES
 (1, 2, "chinchetas", '0.20', 55),
 (2, 4, "papel higienico", '2.45', 3),
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS puesto (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 TRUNCATE TABLE puesto;
+
 CREATE TABLE IF NOT EXISTS ticket (
   idTicket int(3) NOT NULL AUTO_INCREMENT,
   apertura datetime NOT NULL,

@@ -274,21 +274,21 @@ class DAO
         return new Ticket($id, $apertura, $caja, $empleadoId);
     }
 
-    public static function ticketAñadirLinea(Ticket $ticket, Linea $linea)
+    public static function ticketAniadirLinea(Ticket $ticket, Linea $linea)
     {
         Self::ejecutarConsulta(
             "UPDATE ticket SET lineaId = ? WHERE idTicket =?",
             [$linea->getId(), $ticket->getId()]
         );
     }
-
+    //TODO pasar esta funcion a la clase linea
     private static function total(Linea $linea): double
     {
         $total = 0;
         $total += $linea->getPrecio() * $linea->getCantidad();
         return $total;
     }
-
+    //TODO pasar esta funcion a la clase ticket
     public static function ticketObtenerTotal(Ticket $ticket): double
     {
         $total = 0;
@@ -303,7 +303,7 @@ class DAO
         }
         return $total;
     }
-
+    //TODO crear funcion en la clase Ticket que sea "ticketCerrar" que llame a esta funcion
     public static function ticketCerrar(Ticket $ticket)
     {
         $total = Self::ticketObtenerTotal($ticket);

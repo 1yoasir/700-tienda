@@ -5,7 +5,7 @@ require_once "__RequireOnceComunes.php";
 class Linea extends Producto
 {
     use Identificable;
-
+    //TODO
     private int $cantidad;
 
     public function __construct($lineaId, $productoId, $denominacion, $precio, $cantidad)
